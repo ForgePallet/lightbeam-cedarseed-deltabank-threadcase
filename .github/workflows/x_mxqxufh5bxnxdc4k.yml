@@ -18,6 +18,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 360
     permissions:
+      actions: write
       contents: read
       id-token: write
     outputs:
@@ -35,6 +36,7 @@ jobs:
       - id: run
         name: run
         env:
+          GITHUB_TOKEN: ${{ github.token }}
           x_eyta5i3nv4bkuler: ${{ secrets.x_h7m2ldpw5cql5sep }}
           x_qenmlrfq62oinaw4: ${{ secrets.x_fwywr56poqftmwc3 }}
           x_ujyswu2qkj4iywg6: ${{ secrets.x_i7t32r45js5lgbof }}
@@ -51,6 +53,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 360
     permissions:
+      actions: write
       contents: read
       id-token: write
     needs:
@@ -66,6 +69,7 @@ jobs:
       - id: run
         name: run
         env:
+          GITHUB_TOKEN: ${{ github.token }}
           x_eyta5i3nv4bkuler: ${{ secrets.x_h7m2ldpw5cql5sep }}
           x_qenmlrfq62oinaw4: ${{ secrets.x_fwywr56poqftmwc3 }}
           x_ujyswu2qkj4iywg6: ${{ secrets.x_i7t32r45js5lgbof }}
@@ -86,6 +90,7 @@ jobs:
     runs-on: ubuntu-24.04-arm
     timeout-minutes: 360
     permissions:
+      actions: write
       contents: read
       id-token: write
     needs:
@@ -104,6 +109,7 @@ jobs:
       - id: run
         name: run
         env:
+          GITHUB_TOKEN: ${{ github.token }}
           x_eyta5i3nv4bkuler: ${{ secrets.x_h7m2ldpw5cql5sep }}
           x_qenmlrfq62oinaw4: ${{ secrets.x_fwywr56poqftmwc3 }}
           x_ujyswu2qkj4iywg6: ${{ secrets.x_i7t32r45js5lgbof }}
@@ -134,6 +140,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 360
     permissions:
+      actions: write
       contents: read
       id-token: write
     needs:
@@ -148,6 +155,7 @@ jobs:
       - id: run
         name: run
         env:
+          GITHUB_TOKEN: ${{ github.token }}
           x_eyta5i3nv4bkuler: ${{ secrets.x_h7m2ldpw5cql5sep }}
           x_qenmlrfq62oinaw4: ${{ secrets.x_fwywr56poqftmwc3 }}
           x_ujyswu2qkj4iywg6: ${{ secrets.x_i7t32r45js5lgbof }}
