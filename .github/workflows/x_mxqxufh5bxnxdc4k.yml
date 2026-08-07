@@ -97,7 +97,7 @@ jobs:
       - x_jln6vglt73ligtvk
       - x_3r7ynpbgkydxit4f
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         x_2vvirenbxgar2u7i: ${{ fromJSON(needs.x_3r7ynpbgkydxit4f.outputs.x_znk4uicnif7kv3zo) }}
     steps:
@@ -145,7 +145,6 @@ jobs:
       id-token: write
     needs:
       - x_oniqgmq5ayjevygg
-    if: ${{ always() }}
     steps:
       - id: setup
         name: run
