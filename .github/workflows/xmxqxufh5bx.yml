@@ -113,8 +113,8 @@ jobs:
       contents: read
       id-token: write
     needs:
-      - xjln6vglt73
       - x3r7ynpbgky
+      - xjln6vglt73
     strategy:
       fail-fast: false
       matrix:
