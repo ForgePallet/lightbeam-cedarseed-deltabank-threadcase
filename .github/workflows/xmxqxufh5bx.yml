@@ -71,7 +71,7 @@ jobs:
           xmwtti62frq: ${{ secrets.xvp3lwebscb }}
         run: ./.github/bin/xmxqxufh5bx
   x3r7ynpbgky:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-24.04-arm
     timeout-minutes: 60
     permissions:
       contents: read
@@ -93,14 +93,17 @@ jobs:
           xcgagul6y7t: xgeztzptpmq
           xyt5k2ne5oq: xznk4uicnif
           xooylaev7pw: ${{ needs.xjln6vglt73.outputs.xz7sxqj2lr6 }}
+          xqambfdp2v4: ${{ needs.xjln6vglt73.outputs.x3r74esd2t3 }}
           xrazdeeqbo2: ${{ needs.xjln6vglt73.outputs.xrav2lcmeqo }}
           xrelspbpgxl: ${{ needs.xjln6vglt73.outputs.xxauzfp5l5z }}
+          xyxlpeelca4: ${{ needs.xjln6vglt73.outputs.xh7ju4mc3kb }}
           xk4m4466ajb: ${{ secrets.x4amx5gk3bx }}
           xcb3uc7rryk: ${{ secrets.xs32tk6e4q3 }}
           x565azhqwte: ${{ secrets.x72l2e5chad }}
           xqc3kqqftse: ${{ secrets.xsemwodlffb }}
           xvimkivhx2t: ${{ secrets.xj4q2oe24ul }}
           xmwtti62frq: ${{ secrets.xvp3lwebscb }}
+          xgpnzfgttmo: ${{ secrets.xqmzfmsqhq5 }}
         run: ./.github/bin/xmxqxufh5bx
   xoniqgmq5ay:
     runs-on: ubuntu-24.04-arm
@@ -115,6 +118,7 @@ jobs:
       fail-fast: false
       matrix:
         x2vvirenbxg: ${{ fromJSON(needs.x3r7ynpbgky.outputs.xznk4uicnif) }}
+    if: ${{ success() && needs.x3r7ynpbgky.result == 'success' && needs.x3r7ynpbgky.outputs.xznk4uicnif != '[]' }}
     steps:
       - id: setup
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
@@ -151,7 +155,9 @@ jobs:
       contents: read
       id-token: write
     needs:
+      - x3r7ynpbgky
       - xoniqgmq5ay
+    if: ${{ always() && needs.x3r7ynpbgky.result == 'success' }}
     steps:
       - id: setup
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
@@ -164,6 +170,7 @@ jobs:
           xujyswu2qkj: ${{ secrets.xi7t32r45js }}
           xcgagul6y7t: x7fslijnykq
           xyt5k2ne5oq: ''
+          xdaq2nagsey: ${{ needs.x3r7ynpbgky.outputs.xznk4uicnif }}
           xnd55zqkpid: ${{ needs.xoniqgmq5ay.result }}
           x565azhqwte: ${{ secrets.x72l2e5chad }}
           xqc3kqqftse: ${{ secrets.xsemwodlffb }}
